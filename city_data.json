@@ -1,0 +1,77 @@
+[
+    {
+      "name": "Mumbai",
+      "priceFactor": 3.0,
+      "averagePrice": 120.0
+    },
+    {
+      "name": "Delhi",
+      "priceFactor": 2.5,
+      "averagePrice": 95.0
+    },
+    {
+      "name": "Bangalore",
+      "priceFactor": 2.2,
+      "averagePrice": 85.0
+    },
+    {
+      "name": "Hyderabad",
+      "priceFactor": 1.8,
+      "averagePrice": 72.0
+    },
+    {
+      "name": "Chennai",
+      "priceFactor": 1.7,
+      "averagePrice": 68.0
+    },
+    {
+      "name": "Pune",
+      "priceFactor": 1.6,
+      "averagePrice": 65.0
+    },
+    {
+      "name": "Kolkata",
+      "priceFactor": 1.5,
+      "averagePrice": 60.0
+    },
+    {
+      "name": "Ahmedabad",
+      "priceFactor": 1.4,
+      "averagePrice": 55.0
+    },
+    {
+      "name": "Jaipur",
+      "priceFactor": 1.3,
+      "averagePrice": 50.0
+    },
+    {
+      "name": "Lucknow",
+      "priceFactor": 1.2,
+      "averagePrice": 45.0
+    },
+    {
+      "name": "Chandigarh",
+      "priceFactor": 1.3,
+      "averagePrice": 52.0
+    },
+    {
+      "name": "Kochi",
+      "priceFactor": 1.4,
+      "averagePrice": 56.0
+    },
+    {
+      "name": "Gurgaon",
+      "priceFactor": 2.4,
+      "averagePrice": 90.0
+    },
+    {
+      "name": "Noida",
+      "priceFactor": 2.0,
+      "averagePrice": 80.0
+    },
+    {
+      "name": "Indore",
+      "priceFactor": 1.0,
+      "averagePrice": 40.0
+    }
+  ]

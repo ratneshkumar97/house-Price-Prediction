@@ -1,0 +1,14 @@
+{
+    "intercept": 25.0,
+    "cityFactor": 5.0,
+    "areaCoefficient": 0.015,
+    "bedroomCoefficient": 7.5,
+    "bathroomCoefficient": 5.0,
+    "ageCoefficient": -1.5,
+    "floorNumberCoefficient": 0.5,
+    "totalFloorsCoefficient": 0.2,
+    "fullyFurnishedBonus": 12.0,
+    "semiFurnishedBonus": 6.0,
+    "amenityBonus": 2.0
+  }
+  

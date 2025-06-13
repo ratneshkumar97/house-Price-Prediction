@@ -1,0 +1,81 @@
+/* Custom styles for the Indian House Price Prediction System */
+
+/* Only add minimal custom styles as we're using Bootstrap primarily */
+
+/* Additional form styling */
+.form-label {
+    font-weight: 500;
+}
+
+.amenities-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+}
+
+.amenity-checkbox {
+    margin-right: 5px;
+}
+
+/* Result styling */
+#prediction-result {
+    transition: all 0.3s ease;
+}
+
+/* Chart container styling */
+#visualization-container {
+    display: none;
+    transition: all 0.5s ease;
+}
+
+.chart-container {
+    position: relative;
+    height: 300px;
+    margin-bottom: 30px;
+}
+
+/* Banner styling */
+.banner {
+    background: linear-gradient(to right, #1a2980, #26d0ce);
+    color: white;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+    border-radius: 0.3rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.banner h1 {
+    font-weight: 700;
+}
+
+/* Feature card styling */
+.feature-card {
+    height: 100%;
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Footer styling */
+footer {
+    margin-top: 3rem;
+    padding: 2rem 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .amenities-container {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    
+    .chart-container {
+        height: 250px;
+    }
+}

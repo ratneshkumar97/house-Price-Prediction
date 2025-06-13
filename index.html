@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian House Price Prediction</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-in-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom CSS -->
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .dark .glass-card {
+            background: rgba(17, 24, 39, 0.7);
+        }
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        .hover-scale:hover {
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-900 to-gray-800 min-h-screen text-gray-100">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-card">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="/" class="flex items-center space-x-2 text-xl font-bold text-white hover:text-primary transition-colors">
+                    <i class="fas fa-home"></i>
+                    <span>Indian House Price Predictor</span>
+                </a>
+                <div class="hidden md:flex space-x-6">
+                    <a href="/" class="text-white hover:text-primary transition-colors">Predict</a>
+                    <a href="/about.html" class="text-white hover:text-primary transition-colors">About</a>
+                </div>
+                <button class="md:hidden text-white" id="mobile-menu-button">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            <div class="hidden md:hidden" id="mobile-menu">
+                <div class="px-2 pt-2 pb-3 space-y-1">
+                    <a href="/" class="block px-3 py-2 text-white hover:text-primary transition-colors">Predict</a>
+                    <a href="/about.html" class="block px-3 py-2 text-white hover:text-primary transition-colors"> About </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="pt-24 pb-12 px-4">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 animate-fade-in">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+                        Indian House Price Prediction
+                    </h1>
+                    <p class="text-xl text-gray-300 mb-8">
+                        Get accurate price estimates for residential properties across major Indian cities
+                    </p>
+                    <a href="#prediction-form" class="inline-block bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-lg transition-all transform hover:scale-105">
+                        Start Predicting
+                    </a>
+                </div>
+                <div class="md:w-1/2 mt-8 md:mt-0 animate-slide-up">
+                    <i class="fas fa-city text-8xl text-primary/50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Prediction Form -->
+            <div class="lg:col-span-2">
+                <div class="glass-card rounded-xl p-6 hover-scale">
+                    <h2 class="text-2xl font-bold mb-6 text-white">Enter Property Details</h2>
+                    <form id="prediction-form" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="city" class="block text-sm font-medium mb-2">City</label>
+                                <select id="city" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                                    <option value="" disabled selected>Select a city</option>
+                                    <!-- Cities will be populated from JavaScript -->
+                                </select>
+                            </div>
+                            <div>
+                                <label for="area" class="block text-sm font-medium mb-2">Area (sq.ft.)</label>
+                                <input type="number" id="area" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="E.g., 1200" min="100" max="10000" required>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="bedrooms" class="block text-sm font-medium mb-2">Bedrooms</label>
+                                <input type="number" id="bedrooms" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary focus:border-transparent" min="1" max="10" placeholder="E.g., 2" required>
+                            </div>
+                            <div>
+                                <label for="bathrooms" class="block text-sm font-medium mb-2">Bathrooms</label>
+                                <input type="number" id="bathrooms" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary focus:border-transparent" min="1" max="10" placeholder="E.g., 2" required>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <label for="property-age" class="block text-sm font-medium mb-2">Property Age (years)</label>
+                                <input type="number" id="property-age" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary focus:border-transparent" min="0" max="100" placeholder="E.g., 5" required>
+                            </div>
+                            <div>
+                                <label for="floor-number" class="block text-sm font-medium mb-2">Floor Number</label>
+                                <input type="number" id="floor-number" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary focus:border-transparent" min="0" max="50" placeholder="E.g., 3" required>
+                            </div>
+                            <div>
+                                <label for="total-floors" class="block text-sm font-medium mb-2">Total Floors</label>
+                                <input type="number" id="total-floors" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary focus:border-transparent" min="1" max="50" placeholder="E.g., 10" required>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="furnishing" class="block text-sm font-medium mb-2">Furnishing Status</label>
+                            <select id="furnishing" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                                <option value="" disabled selected>Select furnishing status</option>
+                                <option value="unfurnished">Unfurnished</option>
+                                <option value="semi-furnished">Semi-Furnished</option>
+                                <option value="fully-furnished">Fully-Furnished</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Amenities</label>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" id="parking" class="form-checkbox text-primary rounded amenity-checkbox" name="amenities" value="parking">
+                                    <span>Parking</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" id="garden" class="form-checkbox text-primary rounded amenity-checkbox" name="amenities" value="garden">
+                                    <span>Garden/Park</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" id="swimming-pool" class="form-checkbox text-primary rounded amenity-checkbox" name="amenities" value="swimming-pool">
+                                    <span>Swimming Pool</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" id="gym" class="form-checkbox text-primary rounded amenity-checkbox" name="amenities" value="gym">
+                                    <span>Gym</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" id="security" class="form-checkbox text-primary rounded amenity-checkbox" name="amenities" value="security">
+                                    <span>24x7 Security</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" id="power-backup" class="form-checkbox text-primary rounded amenity-checkbox" name="amenities" value="power-backup">
+                                    <span>Power Backup</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" id="elevator" class="form-checkbox text-primary rounded amenity-checkbox" name="amenities" value="elevator">
+                                    <span>Elevator</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" id="club-house" class="form-checkbox text-primary rounded amenity-checkbox" name="amenities" value="club-house">
+                                    <span>Club House</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end space-x-4">
+                            <button type="reset" id="reset-form" class="px-6 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors">
+                                Reset
+                            </button>
+                            <button type="submit" class="px-6 py-2 bg-primary hover:bg-primary/90 rounded-lg transition-colors">
+                                Predict Price
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Prediction Result -->
+                <div id="prediction-result"></div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="lg:col-span-1 space-y-6">
+                <!-- How It Works -->
+                <div class="glass-card rounded-xl p-6 hover-scale">
+                    <h2 class="text-xl font-bold mb-4 text-white">How It Works</h2>
+                    <p class="text-gray-300 mb-4">Our prediction system uses a regression model trained on Indian real estate data to estimate property prices across major cities.</p>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-map-marker-alt text-primary"></i>
+                            <span>Location-based pricing</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-ruler-combined text-primary"></i>
+                            <span>Size matters</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-bed text-primary"></i>
+                            <span>Configuration impact</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-clock text-primary"></i>
+                            <span>Age consideration</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Price Trends -->
+                <div class="glass-card rounded-xl p-6 hover-scale">
+                    <h2 class="text-xl font-bold mb-4 text-white">Price Trends</h2>
+                    <p class="text-gray-300 mb-4">Property prices in India have shown steady growth over the past decade.</p>
+                    <div class="space-y-2 text-gray-300">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-chart-line text-secondary"></i>
+                            <span>Growing urbanization</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-road text-secondary"></i>
+                            <span>Infrastructure development</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-percentage text-secondary"></i>
+                            <span>Interest rates</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visualizations -->
+        <div id="visualization-container" class="mt-12 hidden">
+            <div class="glass-card rounded-xl p-6 hover-scale">
+                <h2 class="text-2xl font-bold mb-6 text-white">Price Analysis</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="chart-container">
+                        <canvas id="price-comparison-chart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="price-factors-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="mt-12">
+            <h2 class="text-3xl font-bold text-center mb-12 text-white">Why Use Our Prediction Tool?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card rounded-xl p-6 text-center hover-scale">
+                    <div class="text-4xl text-primary mb-4">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-white">Fast & Accurate</h3>
+                    <p class="text-gray-300">Get instant price estimates based on current market trends.</p>
+                </div>
+                <div class="glass-card rounded-xl p-6 text-center hover-scale">
+                    <div class="text-4xl text-secondary mb-4">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-white">Data Visualization</h3>
+                    <p class="text-gray-300">Understand price factors with interactive charts.</p>
+                </div>
+                <div class="glass-card rounded-xl p-6 text-center hover-scale">
+                    <div class="text-4xl text-primary mb-4">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-white">Location-Specific</h3>
+                    <p class="text-gray-300">Tailored for Indian real estate market.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="glass-card mt-12">
+        <div class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-white">Indian House Price Predictor</h3>
+                    <p class="text-gray-300">A modern tool to estimate residential property prices across major Indian cities.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-white">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/" class="text-gray-300 hover:text-primary transition-colors">Home</a></li>
+                        <li><a href="/about.html" class="text-gray-300 hover:text-primary transition-colors">About</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-white">Disclaimer</h3>
+                    <p class="text-gray-300 text-sm">This is an estimation tool only. All predictions are approximate and should not be used as the sole basis for real estate decisions.</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
+                <p>&copy; 2025 Indian House Price Predictor. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JavaScript -->
+    <script src="./validation.js"></script>
+    <script src="./prediction.js"></script>
+    <script src="./visualization.js"></script>
+</body>
+</html>

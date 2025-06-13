@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Indian House Price Prediction</title>
+    
+    <!-- Bootstrap CSS (Replit Dark Theme) -->
+    <link href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/"><i class="fas fa-home"></i> Indian House Price Predictor</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="fas fa-calculator"></i> Predict</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/about"><i class="fas fa-info-circle"></i> About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Banner Section -->
+    <div class="banner py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h1><i class="fas fa-info-circle"></i> About Our Prediction System</h1>
+                    <p class="lead">Learn how we estimate property prices and understand the Indian real estate market</p>
+                </div>
+                <div class="col-md-4 d-flex justify-content-center align-items-center">
+                    <i class="fas fa-building fa-5x"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Main Content -->
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h4><i class="fas fa-question-circle"></i> How Our Prediction Model Works</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5>Prediction Methodology</h5>
+                        <p>Our house price prediction system uses a linear regression model that considers multiple factors that influence property prices in the Indian real estate market. The model is based on the following equation:</p>
+                        
+                        <div class="alert alert-secondary">
+                            <p class="text-center mb-0"><strong>Price = Base Price + (Location Factor × City Coefficient) + (Area × Area Rate) + (Bedrooms × Bedroom Value) + ...</strong></p>
+                        </div>
+                        
+                        <p>Each parameter is weighted according to its influence on property prices based on historical data and current market trends.</p>
+                        
+                        <h5 class="mt-4">Key Features of Our Model</h5>
+                        <ul>
+                            <li><strong>Location-Specific Pricing:</strong> Our model adjusts for city-specific price variations. Metropolitan areas like Mumbai and Delhi have higher coefficients compared to tier-2 and tier-3 cities.</li>
+                            <li><strong>Area Calculation:</strong> The price per square foot varies across cities but is a significant factor in all locations.</li>
+                            <li><strong>Configuration Impact:</strong> The number of bedrooms and bathrooms directly influences property value.</li>
+                            <li><strong>Age Depreciation:</strong> The model accounts for property age, with newer properties having higher values.</li>
+                            <li><strong>Floor Premium:</strong> Higher floors typically command higher prices, especially in high-rise buildings.</li>
+                            <li><strong>Furnishing Status:</strong> Fully furnished properties have a premium over unfurnished ones.</li>
+                            <li><strong>Amenity Value:</strong> Each amenity adds incremental value to the property.</li>
+                        </ul>
+                        
+                        <h5 class="mt-4">Model Limitations</h5>
+                        <p>While our model provides a reasonable estimate, it has some limitations:</p>
+                        <ul>
+                            <li>It doesn't account for micro-market variations within cities</li>
+                            <li>Property view, orientation, and floor plan are not considered</li>
+                            <li>Market fluctuations and seasonal trends may affect actual prices</li>
+                            <li>Unique property features or legal issues are not factored in</li>
+                        </ul>
+                        
+                        <div class="alert alert-info mt-4">
+                            <h5 class="alert-heading"><i class="fas fa-lightbulb"></i> Did You Know?</h5>
+                            <p>According to recent studies, location accounts for approximately 40-50% of a property's value in most Indian cities, followed by size (20-30%) and amenities (10-15%).</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-success text-white">
+                        <h4><i class="fas fa-map-marked"></i> Indian Real Estate Market Overview</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5>Current Market Trends</h5>
+                        <p>The Indian real estate market has been evolving rapidly over the past decade. Key trends include:</p>
+                        
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h6><i class="fas fa-city text-primary"></i> Urban Growth</h6>
+                                        <p class="small">Rapid urbanization is driving demand for housing in metropolitan areas and satellite towns.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h6><i class="fas fa-home text-success"></i> Affordable Housing</h6>
+                                        <p class="small">Government initiatives are promoting affordable housing projects across the country.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h6><i class="fas fa-building text-info"></i> Luxury Segment</h6>
+                                        <p class="small">Premium housing with world-class amenities is growing in major cities.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h6><i class="fas fa-leaf text-success"></i> Sustainable Housing</h6>
+                                        <p class="small">Eco-friendly and energy-efficient housing projects are gaining popularity.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h5 class="mt-4">Regional Variations</h5>
+                        <p>India's real estate market shows significant regional differences:</p>
+                        <ul>
+                            <li><strong>Mumbai:</strong> Highest property prices in India, with significant premium for sea-facing properties</li>
+                            <li><strong>Delhi-NCR:</strong> Wide price variation between central Delhi and surrounding regions like Gurgaon and Noida</li>
+                            <li><strong>Bangalore:</strong> IT industry drives property demand, with higher prices in areas near tech parks</li>
+                            <li><strong>Hyderabad:</strong> Experiencing rapid growth with relatively more affordable prices than other metros</li>
+                            <li><strong>Chennai:</strong> Stable market with consistent growth, especially in southern and western zones</li>
+                            <li><strong>Pune:</strong> Popular among young professionals with reasonable prices compared to Mumbai</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Side Column -->
+            <div class="col-lg-4">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-info text-white">
+                        <h4><i class="fas fa-chart-pie"></i> Factors Affecting Prices</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <h6>Location (40-50%)</h6>
+                            <div class="progress">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6>Size & Configuration (20-30%)</h6>
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6>Amenities (10-15%)</h6>
+                            <div class="progress">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 12%" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6>Age & Condition (5-10%)</h6>
+                            <div class="progress">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 8%" aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6>Floor Level (3-8%)</h6>
+                            <div class="progress">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 5%" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6>Other Factors (5-10%)</h6>
+                            <div class="progress">
+                                <div class="progress-bar bg-secondary" role="progressbar" style="width: 5%" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-warning text-dark">
+                        <h4><i class="fas fa-lightbulb"></i> Tips for Buyers</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><i class="fas fa-check-circle text-success"></i> Research the neighborhood thoroughly before buying</li>
+                            <li class="list-group-item"><i class="fas fa-check-circle text-success"></i> Consider future infrastructure developments</li>
+                            <li class="list-group-item"><i class="fas fa-check-circle text-success"></i> Verify property documents and approvals</li>
+                            <li class="list-group-item"><i class="fas fa-check-circle text-success"></i> Check builder reputation and track record</li>
+                            <li class="list-group-item"><i class="fas fa-check-circle text-success"></i> Evaluate connectivity and access to essential services</li>
+                            <li class="list-group-item"><i class="fas fa-check-circle text-success"></i> Consider resale potential of the property</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-danger text-white">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Disclaimer</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>This prediction system provides estimates based on general market trends and simplified models. Actual property prices may vary due to numerous factors not captured in our model.</p>
+                        <p>Always consult with professional real estate agents, visit properties personally, and conduct thorough research before making any property investment decisions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="bg-dark text-white mt-5">
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="fas fa-home"></i> Indian House Price Predictor</h5>
+                    <p>A modern tool to estimate residential property prices across major Indian cities.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/" class="text-white">Home</a></li>
+                        <li><a href="/about" class="text-white">About</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Disclaimer</h5>
+                    <p class="small">This is an estimation tool only. All predictions are approximate and should not be used as the sole basis for real estate decisions.</p>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2023 Indian House Price Predictor. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
